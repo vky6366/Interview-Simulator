@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 import com.nutrino.jobinterviewsimulator.constants.Constants
+import com.nutrino.jobinterviewsimulator.presentation.Screens.LoginScreen
 import com.nutrino.jobinterviewsimulator.ui.theme.JobInterviewSimulatorTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
             JobInterviewSimulatorTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
-                        TestScreen()
+                        LoginScreen()
                     }
                 }
             }
