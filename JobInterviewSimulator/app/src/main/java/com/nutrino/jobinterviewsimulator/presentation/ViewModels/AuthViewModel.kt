@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nutrino.jobinterviewsimulator.data.ResultState.ResultState
 import com.nutrino.jobinterviewsimulator.domain.UseCases.SignUpUseCase
+import com.nutrino.jobinterviewsimulator.presentation.Intent.AuthIntent
 import com.nutrino.jobinterviewsimulator.presentation.StateHandeling.SignUpState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,16 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(private val signUpUseCase: SignUpUseCase) : ViewModel(){
     private val _signUpState = MutableStateFlow(SignUpState())
-    private val signUpState = _signUpState.asStateFlow()
+    val signUpState = _signUpState.asStateFlow()
+
+    fun authIntent(intent: AuthIntent, email: String, password: String){
+        when(intent){
+            AuthIntent.SIGNUPINTENT->{
+                signUp(email = email , password = password)
+            }
+
+        }
+    }
 
     fun signUp(email: String, password: String){
         viewModelScope.launch(Dispatchers.IO) {

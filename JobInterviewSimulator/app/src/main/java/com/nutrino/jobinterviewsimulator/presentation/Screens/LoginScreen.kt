@@ -17,7 +17,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,8 +28,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.nutrino.jobinterviewsimulator.presentation.Navigation.SIGNUPSCREEN
+
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
 
@@ -134,23 +136,12 @@ fun LoginScreen() {
             Text("Sign In", fontWeight = FontWeight.Bold, color = Color.White)
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Google Sign In Button
-        Button(
-            onClick = { /* Google Sign In */ },
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1C1C1E)),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(52.dp),
-            shape = RoundedCornerShape(12.dp)
-        ) {
-            Text("Sign in with Google", color = Color.White, fontWeight = FontWeight.Bold)
-        }
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        Row {
+        Row(modifier = Modifier.clickable{
+            navController.navigate(SIGNUPSCREEN)
+        }) {
             Text(
                 text = "Don’t have an account?",
                 color = Color.Gray,
@@ -162,7 +153,10 @@ fun LoginScreen() {
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 13.sp,
-                modifier = Modifier.clickable { /* Navigate to Sign Up */ }
+                modifier = Modifier.clickable {
+
+                    navController.navigate(SIGNUPSCREEN)
+                }
             )
         }
     }
