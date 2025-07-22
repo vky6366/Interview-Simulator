@@ -5,3 +5,9 @@ data class SignUpState(
     val data: String ="",
     val error: String =""
 )
+
+data class LogInState(
+    val isLoading: Boolean = false,
+    val data: String ="",
+    val error: String =""
+)
