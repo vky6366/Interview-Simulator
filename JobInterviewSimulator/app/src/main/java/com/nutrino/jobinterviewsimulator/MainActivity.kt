@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import com.nutrino.jobinterviewsimulator.presentation.Navigation.MainApp
 import com.nutrino.jobinterviewsimulator.presentation.Screens.LoginScreen
 import com.nutrino.jobinterviewsimulator.ui.theme.JobInterviewSimulatorTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
             JobInterviewSimulatorTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
-                        LoginScreen()
+                        MainApp()
                     }
                 }
             }
