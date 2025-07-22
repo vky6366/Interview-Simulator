@@ -2,6 +2,7 @@ package com.nutrino.jobinterviewsimulator.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.nutrino.jobinterviewsimulator.data.repoImpl.AuthRepoImpl
+import com.nutrino.jobinterviewsimulator.domain.UseCases.LogInUseCase
 import com.nutrino.jobinterviewsimulator.domain.UseCases.SignUpUseCase
 import com.nutrino.jobinterviewsimulator.domain.repository.AuthRepository
 import dagger.Module
@@ -25,5 +26,10 @@ object DiModule {
     @Provides
     fun signUpUseCase(repository: AuthRepository): SignUpUseCase{
         return SignUpUseCase(repository = repository)
+    }
+
+    @Provides
+    fun loginUseCase(repository: AuthRepository): LogInUseCase {
+        return LogInUseCase(repository = repository)
     }
 }

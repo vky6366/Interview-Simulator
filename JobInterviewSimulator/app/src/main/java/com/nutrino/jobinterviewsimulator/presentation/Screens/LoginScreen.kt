@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -28,13 +29,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.nutrino.jobinterviewsimulator.presentation.Navigation.RESUMEUPLOADSCREEN
 import com.nutrino.jobinterviewsimulator.presentation.Navigation.SIGNUPSCREEN
+import com.nutrino.jobinterviewsimulator.presentation.ViewModels.AuthViewModel
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(navController: NavController , authViewModel: AuthViewModel = hiltViewModel()) {
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
+
+
 
     Column(
         modifier = Modifier
@@ -45,7 +51,7 @@ fun LoginScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Interview Prep",
+            text = "Interview Simulator",
             color = Color.White,
             fontSize = 18.sp,
             fontWeight = FontWeight.SemiBold
@@ -63,7 +69,7 @@ fun LoginScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Sign in to continue your interview practice",
+            text = "Log in to continue your interview practice",
             color = Color(0xFFB0B0B0),
             fontSize = 14.sp
         )
@@ -119,14 +125,20 @@ fun LoginScreen(navController: NavController) {
             fontSize = 13.sp,
             modifier = Modifier
                 .align(Alignment.Start)
-                .clickable { /* handle forgot */ }
+                .clickable {
+                /* handle forgot */
+
+                }
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
         // Sign In Button
         Button(
-            onClick = { /* Sign In */ },
+            onClick = {
+
+                TODO()
+            },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0D80F2)),
             modifier = Modifier
                 .fillMaxWidth()
