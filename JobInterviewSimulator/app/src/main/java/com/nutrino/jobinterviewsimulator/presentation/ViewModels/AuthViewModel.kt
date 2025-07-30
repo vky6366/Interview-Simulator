@@ -2,6 +2,8 @@ package com.nutrino.jobinterviewsimulator.presentation.ViewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.nutrino.jobinterviewsimulator.data.ResultState.ResultState
 import com.nutrino.jobinterviewsimulator.domain.UseCases.LogInUseCase
 import com.nutrino.jobinterviewsimulator.domain.UseCases.SignUpUseCase
@@ -19,7 +21,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(private val signUpUseCase: SignUpUseCase,
-    private val logInUseCase: LogInUseCase) : ViewModel(){
+    private val logInUseCase: LogInUseCase,
+    private val firebaseAuth: FirebaseAuth) : ViewModel(){
+    private val _currentUserID = MutableStateFlow<String?>(firebaseAuth.currentUser?.uid)
+    val currentUserID = _currentUserID.asStateFlow()
+
     private val _signUpState = MutableStateFlow(SignUpState())
     val signUpState = _signUpState.asStateFlow()
 
@@ -32,6 +38,7 @@ class AuthViewModel @Inject constructor(private val signUpUseCase: SignUpUseCase
                 signUp(email = email , password = password)
             }
             AuthIntent.LOGININTENT->{
+                logIn(email = email, password = password)
 
             }
 
