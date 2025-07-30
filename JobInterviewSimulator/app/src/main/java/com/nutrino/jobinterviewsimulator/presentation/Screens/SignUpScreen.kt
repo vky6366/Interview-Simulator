@@ -1,5 +1,6 @@
 package com.nutrino.jobinterviewsimulator.presentation.Screens
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,6 +21,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -34,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.nutrino.jobinterviewsimulator.constants.Constants
 import com.nutrino.jobinterviewsimulator.presentation.Navigation.LOGINSCREEN
 import com.nutrino.jobinterviewsimulator.presentation.Navigation.RESUMEUPLOADSCREEN
 import com.nutrino.jobinterviewsimulator.presentation.ViewModels.AuthViewModel
@@ -45,6 +48,15 @@ fun SignUPScreen(navController: NavController, authViewModel: AuthViewModel = hi
     val password = rememberSaveable { mutableStateOf("") }
     val signUpState = authViewModel.signUpState.collectAsState()
     val context = LocalContext.current
+    val currentUserID= authViewModel.currentUserID.collectAsState()
+    LaunchedEffect(Unit) {
+        if(!currentUserID.value.isNullOrBlank()){
+            Log.d(Constants.AUTHTHENTICATION,"${currentUserID.value}")
+            navController.navigate(RESUMEUPLOADSCREEN) {
+                popUpTo(0)
+            }
+        }
+    }
     when {
         signUpState.value.isLoading -> {
             CircularProgressIndicator()
